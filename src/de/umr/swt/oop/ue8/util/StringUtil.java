@@ -29,4 +29,41 @@ public class StringUtil {
         return temp;
     }
 
+    public static boolean isPalindrome(String string) {
+
+        string = string.toLowerCase();
+
+        String reverse = "";
+
+        for (int i = string.length() - 1; i >= 0; i--) {
+            reverse = reverse + string.substring(i, i + 1);
+        }
+
+        return string.equals(reverse);
+
+    }
+
+    public static boolean isSorted(String string, boolean ascending) {
+
+        int temp = 0;
+        for (int i = 0; i < string.length()-1; i++) {
+
+            temp =string.substring(i, i + 1).compareTo(string.substring(i + 1, i + 2));
+
+            if (ascending & temp > 0) {
+                return false;
+            } else if (!ascending & temp < 0) {
+                return false;
+            }
+        }
+
+        return true;
+
+
+
+
+
+
+    }
+
 }
