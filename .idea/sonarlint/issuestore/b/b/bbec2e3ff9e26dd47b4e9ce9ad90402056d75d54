@@ -1,0 +1,10 @@
+
+?squid:S1643"Use a StringBuilder instead.(µõĞ÷ûÿÿÿÿ8êŠş™ø,
+:squid:S1643("Use a StringBuilder instead.(ÒŞ«8êŠş™ø,
+]squid:S1118":Add a private constructor to hide the implicit public one.(Õåø€ûÿÿÿÿ8êŠş™ø,
+jsquid:S18718"LThis branch's code block is the same as the block for the branch on line 54.(É³¹’8êŠş™ø,
+?squid:S1643"Use a StringBuilder instead.(¤ìˆáşÿÿÿÿ8»¤Àšø,
+9squid:S1643"Use a StringBuilder instead.(Ãò58êŠş™ø,
+<squid:S21786"Correct this "&" to "&&".(ìˆÃ´ùÿÿÿÿ8êŠş™ø,
+7squid:S21788"Correct this "&" to "&&".(É³¹’8êŠş™ø,
+‹ squid:ForLoopCounterChangedCheck"XRefactor the code in order to not assign to this loop counter from within the loop body.(Œ´ƒ8êŠş™ø,
