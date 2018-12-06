@@ -19,12 +19,9 @@ public class RomanNumber implements Number {
     @Override
     public int toIntValue() {
 
-        int sum = 0;
-        int currentMax = 0;
-
-        if (romanNumber.length == 1) {
+        if (romanNumber.length == 1) { // no further analysis needed
             return getDecimalValue(romanNumber[0]);
-        } else if (romanNumber.length == 2) {
+        } else if (romanNumber.length == 2) { // easy case, just check if left or right sided
 
             int current = getDecimalValue(romanNumber[1]);
             int next = getDecimalValue(romanNumber[0]);
@@ -34,25 +31,25 @@ public class RomanNumber implements Number {
             } else {
                 return current + next;
             }
-        } else {
+        } else { // more complex cases
 
-            for (int i = 0; i < romanNumber.length; i++) {
+            // setup intermediate variables
+            int sum = 0;
+            int currentMax = 0;
 
-                int current = getDecimalValue(romanNumber[i]);
-                if (current > currentMax) {
-                    currentMax = current;
-                }
+            for (int i = 0; i < romanNumber.length; i++) { // sequence analysis
+                int current = getDecimalValue(romanNumber[i]); // get current figures decimal representation
 
-                int next;
-                if (i + 1 < romanNumber.length) {
-                    next = getDecimalValue(romanNumber[i + 1]);
-                } else {
+                int next; // declare variable for next figure
+                if (i + 1 < romanNumber.length) { // if within "scope" of number
+                    next = getDecimalValue(romanNumber[i + 1]); // get decimal value of next figure
+                } else { // no next figure to check for
                     next = current;
                 }
 
-                if (current >= next) {
+                if (current >= next) { // increment sum by current figures decimal value
                     sum += current;
-                } else {
+                } else { // reduce sum by next figures decimal value
                     sum -= next;
                 }
             }
@@ -68,21 +65,28 @@ public class RomanNumber implements Number {
     @Override
     public void fromIntValue(int value) {
 
+        if (value == 0) {
+            this.num = "";
+        }
+
         StringBuilder roman = new StringBuilder();
 
         int[] arr = new int[]{1000, 500, 100, 50, 10, 5, 1};
         int currentMin = arr[0] + 1;
 
-        for (int i = 0; i < arr.length; i++) {
+        for (int i = 0; i < arr.length; i++) { // check all symbols
+
             if (value == 0) {
                 break;
             }
 
-            if (value / arr[i] >= 1) {
-                for (int j = 1; j <= (int) (value / arr[i]); j++) {
-                    roman.append(getRomanValue(arr[i]));
-                    value -= arr[i];
-                    currentMin = arr[i];
+            int passes = value / arr[i];
+            if (passes >= 1) { // check if a figure is divisible by arr[i]
+
+                for (int j = 1; j <= (int) (passes); j++) { // iteration for given identical figures
+                    roman.append(getRomanValue(arr[i])); // append each figure
+                    value -= arr[i]; // reduce value by figures decimal value
+                    currentMin = arr[i]; // set current minimum
                 }
             } else if (currentMin > arr[0]) {
 

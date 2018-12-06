@@ -10,10 +10,10 @@ public class RomanNumberTest {
     @Test
     public void toIntValue() {
 
-        RomanNumber rn = new RomanNumber("XVI");
+        RomanNumber rn = new RomanNumber("CLXXIV");
 
         Assert.assertEquals(
-                16,
+                174,
                 rn.toIntValue()
         );
 
@@ -22,19 +22,21 @@ public class RomanNumberTest {
 
     @Test
     public void fromIntValue() {
-    }
-
-    @Test
-    public void aTest() {
         // create some roman number
         RomanNumber rn = new RomanNumber("XVXXXI");
 
         // set new value
-        rn.fromIntValue(16);
+        rn.fromIntValue(174);
         // assert new value
         Assert.assertEquals(
-                16,
+                174,
                 rn.toIntValue());
+    }
+
+    @Test
+    public void aTest() {
+
+
 
 
     }
