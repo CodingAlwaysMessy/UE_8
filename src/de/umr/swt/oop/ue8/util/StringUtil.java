@@ -9,6 +9,10 @@ public class StringUtil {
 
         for (int i = 0; i < source.length(); i++) {
 
+            if (firstOccurence < 0) {
+                temp += source.substring(i, source.length());
+            }
+
             firstOccurence = source.indexOf(search, i);
             if (firstOccurence == i) {
                 // unklar wie bei längeren sequenzen vorgegangen werden soll.
