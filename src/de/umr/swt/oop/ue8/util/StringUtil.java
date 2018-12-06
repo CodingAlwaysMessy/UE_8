@@ -4,29 +4,30 @@ public class StringUtil {
 
     public static String replace(String source, String search, String replace) {
 
-        String temp = "";
-        int firstOccurence = 0;
+        if (source.indexOf(search) < 0) {
+            return source;
+        } else {
 
-        for (int i = 0; i < source.length(); i++) {
+            String temp = "";
 
-            if (firstOccurence < 0) {
-                temp += source.substring(i, source.length());
+            for (int i = 0; i < source.length(); i++) {
+
+                if (source.indexOf(search, i) == i) { // replace
+                    temp += replace;
+
+                    if (source.indexOf(search, i + 1) < 0) { // check if another replacement is possible
+                        temp += source.substring(i + search.length()); // append remaining string if no more occurrences
+                        return temp;
+                    } else { // if yes, continue after the new added part
+                        i += replace.length() - 1;
+                    }
+
+                } else { // if no replacement, just append one char at a time
+                    temp += source.substring(i, i + 1);
+                }
             }
-
-            firstOccurence = source.indexOf(search, i);
-            if (firstOccurence == i) {
-                // unklar wie bei längeren sequenzen vorgegangen werden soll.
-
-
-                temp += replace;
-                i += replace.length()-1;
-            } else {
-                temp += source.substring(i, i + 1);
-            }
+            return temp;
         }
-
-
-        return temp;
     }
 
     public static boolean isPalindrome(String string) {
@@ -46,9 +47,9 @@ public class StringUtil {
     public static boolean isSorted(String string, boolean ascending) {
 
         int temp = 0;
-        for (int i = 0; i < string.length()-1; i++) {
+        for (int i = 0; i < string.length() - 1; i++) {
 
-            temp =string.substring(i, i + 1).compareTo(string.substring(i + 1, i + 2));
+            temp = string.substring(i, i + 1).compareTo(string.substring(i + 1, i + 2));
 
             if (ascending & temp > 0) {
                 return false;
@@ -58,10 +59,6 @@ public class StringUtil {
         }
 
         return true;
-
-
-
-
 
 
     }

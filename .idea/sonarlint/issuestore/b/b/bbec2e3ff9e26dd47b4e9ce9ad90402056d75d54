@@ -1,6 +1,0 @@
-
-?squid:S1643"Use a StringBuilder instead.(Ü„êåşÿÿÿÿ8»­ÿù÷,
-?squid:S1643"Use a StringBuilder instead.(»¶¥ùÿÿÿÿ8ùÙú÷,
-]squid:S1118":Add a private constructor to hide the implicit public one.(Õåø€ûÿÿÿÿ8Ğİ÷ù÷,
-?squid:S1643"Use a StringBuilder instead.(µõĞ÷ûÿÿÿÿ8ñÖ‚ú÷,
- squid:ForLoopCounterChangedCheck"XRefactor the code in order to not assign to this loop counter from within the loop body.(Ñ£ëØùÿÿÿÿ8Öşù÷,
