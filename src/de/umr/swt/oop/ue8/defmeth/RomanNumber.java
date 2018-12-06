@@ -23,11 +23,11 @@ public class RomanNumber implements Number {
         int currentMax = 0;
 
         if (romanNumber.length == 1) {
-            return getValue(romanNumber[0]);
+            return getDecimalValue(romanNumber[0]);
         } else if (romanNumber.length == 2) {
 
-            int current = getValue(romanNumber[1]);
-            int next = getValue(romanNumber[0]);
+            int current = getDecimalValue(romanNumber[1]);
+            int next = getDecimalValue(romanNumber[0]);
 
             if (current >= next) {
                 return current - next;
@@ -38,16 +38,16 @@ public class RomanNumber implements Number {
 
             for (int i = 0; i < romanNumber.length; i++) {
 
-                int current = getValue(romanNumber[i]);
+                int current = getDecimalValue(romanNumber[i]);
                 if (current > currentMax) {
                     currentMax = current;
                 }
 
                 int next;
                 if (i + 1 < romanNumber.length) {
-                next = getValue(romanNumber[i + 1]);
+                    next = getDecimalValue(romanNumber[i + 1]);
                 } else {
-                next = current;
+                    next = current;
                 }
 
                 if (current >= next) {
@@ -68,9 +68,68 @@ public class RomanNumber implements Number {
     @Override
     public void fromIntValue(int value) {
 
+        StringBuilder roman = new StringBuilder();
+
+        int[] arr = new int[]{1000, 500, 100, 50, 10, 5, 1};
+        int currentMin = arr[0] + 1;
+
+        for (int i = 0; i < arr.length; i++) {
+            if (value == 0) {
+                break;
+            }
+
+            if (value / arr[i] >= 1) {
+                for (int j = 1; j <= (int) (value / arr[i]); j++) {
+                    roman.append(getRomanValue(arr[i]));
+                    value -= arr[i];
+                    currentMin = arr[i];
+                }
+            } else if (currentMin > arr[0]) {
+
+            } else {
+                roman.append(getRomanValue(arr[i + 1]));
+                value += arr[i + 1];
+                i--;
+            }
+        }
+        this.num = roman.toString();
+        this.romanNumber = num.toCharArray();
     }
 
-    private int getValue(char partialNumber) {
+    private char getRomanValue(int decimalNumber) {
+
+        char value;
+
+        switch (decimalNumber) {
+            case 1:
+                value = 'I';
+                break;
+            case 5:
+                value = 'V';
+                break;
+            case 10:
+                value = 'X';
+                break;
+            case 50:
+                value = 'L';
+                break;
+            case 100:
+                value = 'C';
+                break;
+            case 500:
+                value = 'D';
+                break;
+            case 1000:
+                value = 'M';
+                break;
+            default:
+                value = ' ';
+                break;
+        }
+        return value;
+    }
+
+    private int getDecimalValue(char partialNumber) {
 
         int value = 0;
 
@@ -97,12 +156,10 @@ public class RomanNumber implements Number {
                 value = 1000;
                 break;
             default:
-                value = 0;
+                value = -1;
                 break;
         }
 
         return value;
     }
-
-
 }
