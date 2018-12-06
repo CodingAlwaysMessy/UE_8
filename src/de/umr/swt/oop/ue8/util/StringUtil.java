@@ -5,21 +5,17 @@ public class StringUtil {
     public static String replace(String source, String search, String replace) {
 
         String temp = "";
+        int firstOccurence = 0;
 
         for (int i = 0; i < source.length(); i++) {
-            String temp2 = "";
-            for (int j = 0; j < search.length(); j++) {
-                if (source.substring(i, i + 1).equals(search.substring(j, j + 1))) {
-                    i = i + j;
-                    temp2 += replace.substring(j, j + 1);
-                } else {
-                    i++;
-                    break;
-                }
-            }
 
-            if (temp2.length() == replace.length()) {
-                temp += temp2;
+            firstOccurence = source.indexOf(search, i);
+            if (firstOccurence == i) {
+                // unklar wie bei längeren sequenzen vorgegangen werden soll.
+
+
+                temp += replace;
+                i += replace.length()-1;
             } else {
                 temp += source.substring(i, i + 1);
             }
