@@ -5,10 +5,13 @@ public class RomanNumber implements Number {
     String num = "";
     char[] romanNumber;
 
-    public RomanNumber(String initial) {
-        // cases ergänzen
-        this.num = initial;
-        romanNumber = this.num.toCharArray();
+    public RomanNumber(int number) {
+        if (number <= 0) {
+            num = "";
+        } else {
+            fromIntValue(number);
+            romanNumber = num.toCharArray();
+        }
     }
 
     /**
@@ -18,6 +21,10 @@ public class RomanNumber implements Number {
      */
     @Override
     public int toIntValue() {
+
+        if (num.equals("")) {
+            return 0;
+        }
 
         int currentMaximum = 0;
         int sum = 0;
@@ -41,72 +48,78 @@ public class RomanNumber implements Number {
      *
      * @param value value to set this instances value to.
      */
-    @Override
     public void fromIntValue(int value) {
-
-        if (value == 0) {
-            this.num = "";
-        }
 
         StringBuilder roman = new StringBuilder();
 
-        int[] arr = new int[]{1000, 500, 100, 50, 10, 5, 1};
-        int currentMin = arr[0] + 1;
+        int[] arr = new int[]{1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1};
+        int[] numberSplitted = new int[arr.length];
 
-        for (int i = 0; i < arr.length; i++) { // check all symbols
-
-            if (value == 0) {
-                break;
+        for (int i = 0; i < arr.length; i++) {
+            numberSplitted[i] = (int) value / arr[i];
+            if (numberSplitted[i] > 0) {
+                value -= numberSplitted[i] * arr[i];
             }
+        }
 
-            int passes = value / arr[i];
-            if (passes >= 1) { // check if a figure is divisible by arr[i]
-
-                for (int j = 1; j <= (int) (passes); j++) { // iteration for given identical figures
-                    roman.append(getRomanValue(arr[i])); // append each figure
-                    value -= arr[i]; // reduce value by figures decimal value
-                    currentMin = arr[i]; // set current minimum
+        for (int i = 0; i < numberSplitted.length; i++) {
+            if (numberSplitted[i] >= 1) {
+                for (int j = 0; j < numberSplitted[i]; j++) {
+                    roman.append(getRomanValue(arr[i]));
                 }
-            } else if (currentMin > arr[0]) {
-
             } else {
-                roman.append(getRomanValue(arr[i + 1]));
-                value += arr[i + 1];
-                i--;
+                roman.append(getRomanValue(numberSplitted[i]));
             }
         }
         this.num = roman.toString();
-        this.romanNumber = num.toCharArray();
     }
 
-    private char getRomanValue(int decimalNumber) {
+    private String getRomanValue(int decimalNumber) {
 
-        char value;
+        String value;
 
         switch (decimalNumber) {
             case 1:
-                value = 'I';
+                value = "I";
+                break;
+            case 4:
+                value = "IV";
                 break;
             case 5:
-                value = 'V';
+                value = "V";
+                break;
+            case 9:
+                value = "IX";
                 break;
             case 10:
-                value = 'X';
+                value = "X";
+                break;
+            case 40:
+                value = "XL";
                 break;
             case 50:
-                value = 'L';
+                value = "L";
+                break;
+            case 90:
+                value = "XC";
                 break;
             case 100:
-                value = 'C';
+                value = "C";
+                break;
+            case 400:
+                value = "CD";
                 break;
             case 500:
-                value = 'D';
+                value = "D";
+                break;
+            case 900:
+                value = "CM";
                 break;
             case 1000:
-                value = 'M';
+                value = "M";
                 break;
             default:
-                value = ' ';
+                value = "";
                 break;
         }
         return value;
@@ -144,11 +157,5 @@ public class RomanNumber implements Number {
         }
 
         return value;
-    }
-
-    public int toIntValueRec() {
-
-        return 1;
-
     }
 }
