@@ -10,11 +10,11 @@ public class RomanNumberTest {
     @Test
     public void toIntValue() {
 
-        RomanNumber rn = new RomanNumber("CLXXIV");
+        RomanNumber rn = new RomanNumber("CLXXVI");
 
         Assert.assertEquals(
-                174,
-                rn.toIntValue()
+                176,
+                rn.toIntValueRight()
         );
 
 
@@ -36,6 +36,12 @@ public class RomanNumberTest {
     @Test
     public void aTest() {
 
+        RomanNumber rn = new RomanNumber("XIX");
+
+        Assert.assertEquals(
+                19,
+                rn.toIntValueRight()
+        );
 
 
 

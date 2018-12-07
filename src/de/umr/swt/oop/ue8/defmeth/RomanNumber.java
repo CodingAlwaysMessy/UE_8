@@ -19,42 +19,21 @@ public class RomanNumber implements Number {
     @Override
     public int toIntValue() {
 
-        if (romanNumber.length == 1) { // no further analysis needed
-            return getDecimalValue(romanNumber[0]);
-        } else if (romanNumber.length == 2) { // easy case, just check if left or right sided
+        int currentMaximum = 0;
+        int sum = 0;
 
-            int current = getDecimalValue(romanNumber[1]);
-            int next = getDecimalValue(romanNumber[0]);
+        for (int i = romanNumber.length - 1; i >= 0; i--) {
 
-            if (current >= next) {
-                return current - next;
+            int number = getDecimalValue(romanNumber[i]);
+
+            if (number >= currentMaximum) {
+                currentMaximum = number;
+                sum += number;
             } else {
-                return current + next;
+                sum -= number;
             }
-        } else { // more complex cases
-
-            // setup intermediate variables
-            int sum = 0;
-            int currentMax = 0;
-
-            for (int i = 0; i < romanNumber.length; i++) { // sequence analysis
-                int current = getDecimalValue(romanNumber[i]); // get current figures decimal representation
-
-                int next; // declare variable for next figure
-                if (i + 1 < romanNumber.length) { // if within "scope" of number
-                    next = getDecimalValue(romanNumber[i + 1]); // get decimal value of next figure
-                } else { // no next figure to check for
-                    next = current;
-                }
-
-                if (current >= next) { // increment sum by current figures decimal value
-                    sum += current;
-                } else { // reduce sum by next figures decimal value
-                    sum -= next;
-                }
-            }
-            return sum;
         }
+        return sum;
     }
 
     /**
@@ -165,5 +144,11 @@ public class RomanNumber implements Number {
         }
 
         return value;
+    }
+
+    public int toIntValueRec() {
+
+        return 1;
+
     }
 }
